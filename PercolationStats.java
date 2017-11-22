@@ -9,15 +9,24 @@ public class PercolationStats {
 
     private Percolation percolation;
     private int n;
+    private double sumThreshold;
+    private int trials;
 
     public PercolationStats(int n, int trials) {
 
-        this.n = n;
-
-
         if (n <= 0 || trials <= 0) throw new java.lang.IllegalArgumentException();
 
+
+        this.n = n;
+
+        this.trials = trials;
+
+
+        this.sumThreshold = 0;
+
         for (int t = 0; t < trials; t++) {
+
+            double p;
 
             this.percolation = new Percolation(n);
 
@@ -33,9 +42,14 @@ public class PercolationStats {
 
                 this.percolation.open(randRow, randCol);
 
-//                System.out.println(this.percolation.numberOfOpenSites());
             }
 
+
+            double openSites = this.percolation.numberOfOpenSites();
+
+            p = openSites / (this.n * this.n);
+
+            this.sumThreshold += p;
 
 
         }
@@ -44,7 +58,9 @@ public class PercolationStats {
     }
 
     public double mean() {
-        return 0;
+
+        return this.sumThreshold/this.trials;
+
     }
 
     public double stdev() {
@@ -64,14 +80,9 @@ public class PercolationStats {
 
     public static void main(String[] args) {
 
-        PercolationStats obj = new PercolationStats(1000, 1);
+        PercolationStats obj = new PercolationStats(100, 100);
 
-        double p;
 
-        double openSites = obj.percolation.numberOfOpenSites();
-
-        p = openSites / (obj.n * obj.n);
-
-        System.out.println("Probability p is: " + p);
+        System.out.println("Probability p is: " + obj.mean());
     }
 }
