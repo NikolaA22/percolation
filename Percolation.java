@@ -136,15 +136,15 @@ public class Percolation {
 
     public static void main(String[] args) {
 
-        Percolation obj = new Percolation(5);
+        Percolation obj = new Percolation(4);
 
 //        System.out.println("Number of components at the beginning: " + obj.wquf.count());
 
         obj.open(1, 1);
-        obj.open(2, 1);
-        obj.open(3, 1);
-        obj.open(4, 1);
-        obj.open(5, 1);
+        obj.open(2, 2);
+        obj.open(3, 3);
+//        obj.open(4, 1);
+        obj.open(4, 4);
 
         System.out.println("Percolates? " + obj.percolates());
 //        System.out.println("Number of components at the end: " + obj.wquf.count());
