@@ -65,14 +65,14 @@ public class PercolationStats {
 
     }
 
-    private double stdev() {
+    private double stddev() {
         return StdStats.stddev(this.results);
 
     }
 
     private double confidenceLo() {
 
-        double tmp = mean() - (1.96*stdev()*(1/Math.sqrt(this.trials)));
+        double tmp = mean() - (1.96*stddev()*(1/Math.sqrt(this.trials)));
 
         return tmp;
 
@@ -80,7 +80,7 @@ public class PercolationStats {
 
     private double confidenceHi() {
 
-        double tmp = mean() + (1.96*stdev()*(1/Math.sqrt(this.trials)));
+        double tmp = mean() + (1.96*stddev()*(1/Math.sqrt(this.trials)));
 
         return tmp;
 
@@ -97,7 +97,7 @@ public class PercolationStats {
 
 
         System.out.println("mean                    = " + obj.mean());
-        System.out.println("stdev                   = " + obj.stdev());
+        System.out.println("stdev                   = " + obj.stddev());
         System.out.println("95% confidence interval = [" + obj.confidenceLo() + " " + obj.confidenceHi()+"]");
     }
 }

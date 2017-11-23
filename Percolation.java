@@ -47,7 +47,7 @@ public class Percolation {
 
     } // open site (row, col) if it is not open already
 
-    public void connectOpen(int row, int col) {
+    private void connectOpen(int row, int col) {
 
         row--;
         col--;
