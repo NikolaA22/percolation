@@ -3,26 +3,28 @@
  */
 
 import edu.princeton.cs.algs4.StdRandom;
+import edu.princeton.cs.algs4.StdStats;
 
-
+// FIXME Keep p in a double[][]
 public class PercolationStats {
 
     private Percolation percolation;
     private int n;
-    private double sumThreshold;
     private int trials;
+    private double [] results; //keep [trial][p]
 
     public PercolationStats(int n, int trials) {
 
         if (n <= 0 || trials <= 0) throw new java.lang.IllegalArgumentException();
 
+        this.results = new double[trials];
 
         this.n = n;
 
         this.trials = trials;
 
 
-        this.sumThreshold = 0;
+
 
         for (int t = 0; t < trials; t++) {
 
@@ -49,7 +51,8 @@ public class PercolationStats {
 
             p = openSites / (this.n * this.n);
 
-            this.sumThreshold += p;
+            this.results[t] = p;
+
 
 
         }
@@ -59,30 +62,43 @@ public class PercolationStats {
 
     public double mean() {
 
-        return this.sumThreshold/this.trials;
+        return StdStats.mean(this.results);
 
     }
 
     public double stdev() {
-        return 0;
+        return StdStats.stddev(this.results);
 
     }
 
     public double confidenceLo() {
-        return 0;
+
+        double tmp = mean() - (1.96*stdev()*(1/Math.sqrt(this.trials)));
+
+        return tmp;
 
     }
 
     public double confidenceHi() {
-        return 0;
+
+        double tmp = mean() + (1.96*stdev()*(1/Math.sqrt(this.trials)));
+
+        return tmp;
 
     }
 
     public static void main(String[] args) {
 
-        PercolationStats obj = new PercolationStats(100, 100);
+        String n = args[0];
+
+        String trials = args[1];
 
 
-        System.out.println("Probability p is: " + obj.mean());
+        PercolationStats obj = new PercolationStats(Integer.parseInt(n), Integer.parseInt(trials));
+
+
+        System.out.println("mean                    = " + obj.mean());
+        System.out.println("stdev                   = " + obj.stdev());
+        System.out.println("95% confidence interval = [" + obj.confidenceLo() + " " + obj.confidenceHi()+"]");
     }
 }
