@@ -5,7 +5,6 @@
 import edu.princeton.cs.algs4.StdRandom;
 import edu.princeton.cs.algs4.StdStats;
 
-// FIXME Keep p in a double[][]
 public class PercolationStats {
 
     private Percolation percolation;
