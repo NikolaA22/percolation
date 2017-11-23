@@ -59,18 +59,18 @@ public class PercolationStats {
 
     }
 
-    public double mean() {
+    private double mean() {
 
         return StdStats.mean(this.results);
 
     }
 
-    public double stdev() {
+    private double stdev() {
         return StdStats.stddev(this.results);
 
     }
 
-    public double confidenceLo() {
+    private double confidenceLo() {
 
         double tmp = mean() - (1.96*stdev()*(1/Math.sqrt(this.trials)));
 
@@ -78,7 +78,7 @@ public class PercolationStats {
 
     }
 
-    public double confidenceHi() {
+    private double confidenceHi() {
 
         double tmp = mean() + (1.96*stdev()*(1/Math.sqrt(this.trials)));
 
